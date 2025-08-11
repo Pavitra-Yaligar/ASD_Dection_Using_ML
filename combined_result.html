@@ -1,0 +1,25 @@
+<!-- templates/combined_result.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Combined Result</title>
+</head>
+<body>
+    <h2>Combined Diagnosis Result</h2>
+    <p><strong>User:</strong> {{ username }}</p>
+
+    <h3>Image Result:</h3>
+    <p>Label: {{ data.image_result }}</p>
+    <p>Confidence: {{ data.image_conf }}%</p>
+
+    <h3>Behavior Result:</h3>
+    <p>Result: {{ data.behavior_result }}</p>
+    <p>Confidence: {{ data.behavior_conf }}%</p>
+
+    <h3>Combined Result:</h3>
+    <p>Final Prediction: {{ data.combined_result }}</p>
+    <p>Confidence: {{ data.combined_conf }}%</p>
+
+    <img src="{{ url_for('static', filename=data.image_path.split('static/')[-1]) }}" width="300">
+</body>
+</html>

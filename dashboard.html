@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASD Detection Dashboard</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Bootstrap (for card layout and buttons) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Custom Style -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #e0eafc, #cfdef3);
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .card-deck-scroll {
+    display: flex;
+    justify-content: center; /* Center the cards */
+    flex-wrap: wrap;         /* Allow wrapping to next row on smaller screens */
+    gap: 30px;
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+    .card {
+      min-width: 250px;
+      max-width: 300px;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .chatbot-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 28px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+
+    .chatbot-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ✅ Hero Section (ASD Logo) -->
+  <div class="bg-blue-700 text-white py-10 px-4">
+    <div class="max-w-screen-lg mx-auto text-center">
+      <img 
+        src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8c56aa33-fdde-4caa-a58a-ea88096ad5df.png" 
+        alt="ASD Detection Logo" 
+        class="mx-auto h-28 md:h-32 lg:h-36 mb-4 rounded-full shadow-lg"
+      />
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">Autism Spectrum Detection</h1>
+      <p class="text-lg md:text-xl">Interactive assessment for early identification</p>
+    </div>
+  </div>
+
+  <!-- ✅ Header Section -->
+  <header class="bg-blue-600 text-white p-4 shadow-md text-center">
+    <h2 class="text-2xl font-bold">ASD Detection Portal</h2>
+    <p class="text-sm">Welcome back, User!</p>
+  </header>
+
+  <!-- ✅ Cards Section -->
+  <div class="card-deck-scroll px-4">
+    <!-- Behavioral Analysis Card -->
+    <div class="card">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c5db0d1d-4d0f-48a6-8fef-873ca6e9cf27.png" alt="Behavioral assessment interface preview" class="rounded-md">
+      <div class="card-body text-center">
+        <h5 class="card-title">BEHAVOIRAL ANALYSIS</h5>
+        <p class="card-text">Answer a few questions to detect signs of ASD behaviorally.</p>
+        <a href="{{ url_for('behavior') }}" class="btn btn-primary">Start Assessment</a>
+      </div>
+    </div>
+
+    <!-- Image Analysis Card -->
+    <div class="card">
+      <img src="{{ url_for('static', filename='images/image.jpg') }}" class="card-img-top" alt="Image Analysis" />
+      <div class="card-body text-center">
+        <h5 class="card-title">IMAGE ANALYSIS</h5>
+        <p class="card-text">Upload an image for facial feature analysis using Machine Learning.</p>
+        <a href="{{ url_for('image_upload') }}" class="btn btn-success">Upload Image</a>
+      </div>
+    </div>
+
+    <!-- Awareness Video Card -->
+    <div class="card">
+      <img src="{{ url_for('static', filename='images/awareness.jpg') }}" class="card-img-top" alt="Awareness" />
+      <div class="card-body text-center">
+        <h5 class="card-title">AWARENESS VIDEO</h5>
+        <p class="card-text">Learn more about Autism and its early signs.</p>
+        <a href="{{ url_for('awareness') }}" class="btn btn-info">Watch</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Chatbot Button -->
+  <button class="chatbot-btn" onclick="window.location.href='/chatbot'">
+    💬
+  </button>
+
+  <!-- Bootstrap Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

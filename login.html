@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - ASD Detection Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+  <!-- ✅ Hero Section (ASD Logo) -->
+  <div class="bg-blue-700 text-white py-10 px-4">
+    <div class="max-w-screen-lg mx-auto text-center">
+      <img 
+        src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8c56aa33-fdde-4caa-a58a-ea88096ad5df.png" 
+        alt="ASD Detection Logo" 
+        class="mx-auto h-28 md:h-32 lg:h-36 mb-4 rounded-full shadow-lg"
+      />
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">Autism Spectrum Detection</h1>
+      
+    </div>
+  </div>
+
+  <!-- Main Login Section -->
+  <div class="flex-grow flex items-center justify-center p-4">
+    <div class="max-w-4xl w-full flex flex-col md:flex-row rounded-xl overflow-hidden shadow-xl bg-white">
+      
+      <!-- Left Side: Illustration -->
+      <div class="bg-indigo-600 text-white p-8 md:w-1/2 flex flex-col justify-center items-center">
+        <div class="mb-6">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2ae35ab8-e196-4a56-a194-653ea419924f.png"
+              alt="ASD Illustration"
+              class="rounded-lg shadow-md w-full h-auto"/>
+        </div>
+        <h2 class="text-2xl font-bold mb-2 text-center">ASD Detection Portal</h2>
+        <p class="text-indigo-100 text-center max-w-md">
+          Supporting early autism spectrum disorder detection through advanced analysis and compassionate care.
+        </p>
+      </div>
+
+      <!-- Right Side: Login Form -->
+      <div class="p-8 md:w-1/2">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Welcome Back</h1>
+        <form class="space-y-4" action="/login" method="POST">
+
+          <!-- Username -->
+          <div>
+            <label for="loginUsername" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-user text-gray-400"></i>
+              </div>
+              <input type="text" id="loginUsername" name="username" required
+                    class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    placeholder="Enter your username"/>
+            </div>
+          </div>
+
+          <!-- Optional Email -->
+          <div>
+            <label for="loginEmail" class="block text-sm font-medium text-gray-700 mb-1">Email Address <span class="text-gray-400">(optional)</span></label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-envelope text-gray-400"></i>
+              </div>
+              <input type="email" id="loginEmail" name="email"
+                    class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    placeholder="your@email.com"/>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div>
+            <label for="loginPassword" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-lock text-gray-400"></i>
+              </div>
+              <input type="password" id="loginPassword" name="password" required
+                    class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    placeholder="••••••••"/>
+              <button type="button" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600" id="showPassword">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Remember & Forgot 
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input type="checkbox" id="rememberMe" class="checkbox hidden">
+              <label for="rememberMe" class="flex items-center cursor-pointer">
+                <span class="checkmark w-4 h-4 border border-gray-300 rounded-sm mr-2"></span>
+                <span class="text-sm text-gray-600">Remember me</span>
+              </label>
+            </div>
+            <a href="#" class="text-sm text-indigo-600 hover:text-indigo-500">Forgot password?</a>
+          </div>-->
+
+          <!-- Buttons -->
+          <div class="flex justify-between gap-4">
+            <button type="submit"
+                    class="flex-1 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              Log In
+            </button>
+            <a href="/dashboard" class="flex-1 text-center bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition duration-200">
+              Skip
+            </a>
+          </div>
+        </form>
+
+        <div class="mt-6 text-center text-sm text-gray-600">
+          Don't have an account? <a href="/signup" class="text-indigo-600 hover:text-indigo-500 font-medium">Sign up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle password visibility
+    document.getElementById('showPassword').addEventListener('click', function () {
+      const passwordInput = document.getElementById('loginPassword');
+      const type = passwordInput.type === 'password' ? 'text' : 'password';
+      passwordInput.type = type;
+      this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+    });
+  </script>
+</body>
+</html>

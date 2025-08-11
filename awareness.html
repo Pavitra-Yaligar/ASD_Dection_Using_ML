@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Autism Awareness & Prevention</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('{{ url_for("static", filename="images/awareness_bg.jpg") }}');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #fff;
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      padding-top: 25px;
+      height: 0;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Autism Spectrum Disorder (ASD) Awareness</h2>
+
+  <div class="video-container mb-5">
+    <!-- Replace this YouTube URL with your own awareness video -->
+    <iframe src="https://www.youtube.com/embed/vNZVV4Ciccg" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+  </div>
+
+  <div class="card bg-dark text-light p-4 shadow-lg">
+    <h4>Prevention & Support Guidelines</h4>
+    <ul>
+      <li>Encourage early developmental screenings and professional evaluations.</li>
+      <li>Promote structured routines and predictable environments.</li>
+      <li>Engage in behavioral, occupational, and speech therapies when required.</li>
+      <li>Support inclusive education and awareness in communities.</li>
+      <li>Reduce exposure to environmental risk factors during pregnancy.</li>
+    </ul>
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="/dashboard" class="btn btn-light">Back to Dashboard</a>
+  </div>
+</div>
+
+</body>
+</html>

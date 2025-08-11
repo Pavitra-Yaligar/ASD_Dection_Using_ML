@@ -1,0 +1,5 @@
+import os
+for root, dirs, files in os.walk(".", topdown=True):
+    for name in files:
+        if name == "best.pt":
+            print(os.path.join(root, name))

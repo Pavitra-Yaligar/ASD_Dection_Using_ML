@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Behavioral Assessment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-4xl bg-white p-8 rounded-2xl shadow-2xl">
+        <h2 class="text-3xl font-bold text-center mb-6 text-blue-800">Behavioral Assessment</h2>
+
+        <form method="POST" action="/behavior_result" class="space-y-6">
+
+            <!-- 🧠 Basic Information -->
+            <div>
+                <h3 class="text-xl font-semibold text-blue-700 mb-2">Basic Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Age -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Age (Years)</label>
+                        <input type="number" name="age" required class="mt-1 w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <!-- Gender -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                        <div class="flex gap-4 mt-1">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="gender" value="male" required class="text-blue-600 focus:ring-blue-500">
+                                <span>Male</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="gender" value="female" required class="text-blue-600 focus:ring-blue-500">
+                                <span>Female</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Family History -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Family History of ASD</label>
+                        <div class="flex gap-4 mt-1">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="family_history" value="yes" required class="text-blue-600 focus:ring-blue-500">
+                                <span>Yes</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="family_history" value="no" required class="text-blue-600 focus:ring-blue-500">
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Jaundice -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Jaundice at Birth</label>
+                        <div class="flex gap-4 mt-1">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="jaundice" value="yes" required class="text-blue-600 focus:ring-blue-500">
+                                <span>Yes</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="jaundice" value="no" required class="text-blue-600 focus:ring-blue-500">
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-6 border-gray-300">
+
+            <!-- 📝 Behavioral Questions -->
+            <h3 class="text-xl font-semibold text-blue-700 mb-2">Behavioral Questions</h3>
+            <p class="text-sm text-gray-600 mb-4">Select how often the child shows each behavior:</p>
+
+            {% set questions = [
+                "Does the child respond to their name when called?",
+                "Does the child make eye contact with others?",
+                "Does the child enjoy social games?",
+                "Does the child use gestures to communicate?",
+                "Does the child engage in pretend play?",
+                "Does the child point to objects of interest?",
+                "Does the child understand simple instructions?",
+                "Does the child share enjoyment with others?",
+                "Does the child express a range of emotions?",
+                "Does the child react appropriately to loud sounds?"
+            ] %}
+
+            {% for q in questions %}
+            <div class="mb-4">
+                <label class="block text-gray-800 font-medium mb-1">{{ loop.index }}. {{ q }}</label>
+                <select name="q{{ loop.index }}" required class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Select frequency</option>
+                    <option value="0"> NO </option>
+                    <option value="1"> YES </option>
+                    
+                </select>
+            </div>
+            {% endfor %}
+
+            <!-- Submit -->
+            <div class="text-center pt-4">
+                <button type="submit" class="bg-blue-600 text-white font-semibold py-2 px-6 rounded hover:bg-blue-700 transition">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

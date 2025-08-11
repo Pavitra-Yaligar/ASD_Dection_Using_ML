@@ -1,0 +1,87 @@
+<!-- templates/behavior_result.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Behavioral Prediction Result</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { background-color: #f7fbff; }
+    .card { max-width: 900px; margin: 32px auto; }
+  </style>
+</head>
+<body class="min-h-screen flex items-start justify-center py-8">
+  <div class="card bg-white rounded-xl shadow-lg p-6 md:p-8">
+    <header class="text-center mb-6">
+      <img src="https://placehold.co/150x60?text=ASD+Tool" alt="ASD Tool logo" class="mx-auto mb-3">
+      <h1 class="text-2xl font-semibold text-sky-600">Behavioral Prediction Result</h1>
+      <p class="text-sm text-gray-500 mt-1">Model outcome based on the assessment you submitted</p>
+    </header>
+
+    <div class="grid md:grid-cols-3 gap-4 mb-6">
+      <div class="p-4 rounded-lg bg-slate-50 text-center">
+        <p class="text-sm text-gray-600">Result</p>
+        <div class="text-xl font-semibold text-sky-700 mt-1">{{ prediction }}</div>
+      </div>
+
+      <div class="p-4 rounded-lg bg-slate-50 text-center">
+        <p class="text-sm text-gray-600">Model confidence</p>
+        <div class="text-xl font-semibold text-sky-700 mt-1">{{ confidence }}%</div>
+      </div>
+
+      <div class="p-4 rounded-lg bg-slate-50 text-center">
+        <p class="text-sm text-gray-600">Severity</p>
+        {% set severity = 'Low' %}
+        {% if confidence >= 85 %}
+            {% set severity = 'High' %}
+        {% elif confidence >= 60 %}
+            {% set severity = 'Moderate' %}
+        {% endif %}
+        <div class="text-xl font-semibold text-sky-700 mt-1">{{ severity }}</div>
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <h2 class="text-sm text-gray-600 mb-2">Prediction distribution</h2>
+      <div class="bg-white p-4 rounded-lg border">
+        <canvas id="resultChart"></canvas>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-center mt-4">
+      <a href="{{ url_for('dashboard') }}" class="inline-block bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700">Back to Dashboard</a>
+      <a href="{{ url_for('download_pdf') }}" class="inline-block border border-sky-600 text-sky-600 px-4 py-2 rounded-lg hover:bg-sky-50">Download Report</a>
+    </div>
+  </div>
+
+<script>
+    const chartLabels = JSON.parse('{{ chart_labels | tojson | safe | default("[]") }}');
+    const chartValues = JSON.parse('{{ chart_values | tojson | safe | default("[]") }}');
+
+
+    const ctx = document.getElementById('resultChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                label: 'Prediction (%)',
+                data: chartValues,
+                backgroundColor: [
+                    '#ea4335', // red for autistic
+                    '#34a853'  // green for non-autistic
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true, max: 100 }
+            }
+        }
+    });
+</script>
+</body>
+</html>

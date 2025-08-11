@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ASD Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .chat-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+        .chat-log {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .topic-button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .topic-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="chat-container">
+    <h2>ASD Chatbot</h2>
+    <div class="chat-log" id="chatLog">
+        <p><strong>Bot:</strong> Hello! Please choose a topic related to Autism Spectrum Disorder:</p>
+    </div>
+    <div id="topics"></div>
+</div>
+
+<script>
+    // Fetch available topics from backend
+    fetch("/chatbot")
+        .then(res => res.json())
+        .then(data => {
+            const topicsContainer = document.getElementById("topics");
+            data.topics.forEach(topic => {
+                const btn = document.createElement("button");
+                btn.className = "topic-button";
+                btn.textContent = topic;
+                btn.onclick = () => sendTopic(topic);
+                topicsContainer.appendChild(btn);
+                
+            });
+        });
+
+    function sendTopic(topic) {
+        const log = document.getElementById("chatLog");
+        log.innerHTML += `<p><strong>You:</strong> ${topic}</p>`;
+        
+        fetch("/chatbot", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ topic: topic })
+        })
+        .then(res => res.json())
+        .then(data => {
+            log.innerHTML += `<p><strong>Bot:</strong> ${data.response}</p>`;
+            log.scrollTop = log.scrollHeight;
+        });
+    }
+</script>
+</body>
+</html>

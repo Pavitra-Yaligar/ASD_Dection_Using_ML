@@ -1,0 +1,20 @@
+<!-- templates/combined_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Combined Mode</title>
+</head>
+<body>
+    <h1>Combined Mode Form</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="image">Upload Image:</label>
+        <input type="file" name="image" accept="image/*"><br><br>
+
+        <label for="questionnaire">Questionnaire Score:</label>
+        <input type="number" name="questionnaire"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
